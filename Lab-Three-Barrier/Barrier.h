@@ -1,6 +1,5 @@
 #include "Semaphore.h"
 #include <iostream>
-#include <stdio.h>
 
 /*! \class Barrier
     \brief A Barrier Implementation
