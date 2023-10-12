@@ -7,10 +7,14 @@
 
 CC=g++
 CFLAGS= -std=c++11 -pthread
+CFILES= Semaphore.cpp rendezvous.cpp
 
-SIMPLE: helloThreads.cpp
-	g++ -std=c++11 -pthread helloThreads.cpp
 
+SIMPLE: Semaphore.cpp rendezvous.cpp Semaphore.h
+	g++ -std=c++11 -pthread Semaphore.cpp rendezvous.cpp Semaphore.h
+
+YO: $(CFILES)
+	g++  -Wall -std=c++17 $(CFILES) -o main
 
 CLEAN:
 	rm *.o
