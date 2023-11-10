@@ -14,15 +14,17 @@ Author: Ming Kit Choy C00246492
 5. TO DO section listing items that need to be completed (errors, missing features etc.)
 
 6. List of files and what they contain
-Semaphore.h - The header file for the Semaphore class. 
-Semaphore.cpp - The implementation file for the Semaphore class. 
-MutualEx.cpp - This is the file containing the main function. This main function must create at least two threads demonstrating mutual exclusion
+- Semaphore.h - The header file for the Semaphore class. 
+- Semaphore.cpp - The implementation file for the Semaphore class. 
+- MutualEx.cpp - This is the file containing the main function. This main function must create at least two threads demonstrating mutual exclusion
 in action using a Semaphore. In this lab this is where all your code will
 go.
 
-Makefile - This is the project file. It contains rules that tell the system how to
+- Makefile - This is the project file. It contains rules that tell the system how to
 compile the code and produce a working executable called mutualExclusion.
-Doxyfile - This file contains the settings for the Doxygen tool. It is generated
+
+- Doxyfile - This file contains the settings for the Doxygen tool. It is generated
 by the Doxygen program when run for the first time.
 
 7. Any other relevent information
+

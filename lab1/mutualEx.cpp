@@ -6,6 +6,7 @@
 
 static const int num_threads = 100;
 int sharedVariable=0;
+std::mutex mutexLock;
 
 
 /*! \fn updateTask
@@ -19,8 +20,10 @@ void updateTask(std::shared_ptr<Semaphore> firstSem, int numUpdates){
 
   for(int i=0;i<numUpdates;i++){
     //UPDATE SHARED VARIABLE HERE!
+    //Use mutexLock to make thread hold sharedVariale
     mutexLock.lock();
     sharedVariable++;
+    //Release the mutexLock
     mutexLock.unlock();
   }
 }
