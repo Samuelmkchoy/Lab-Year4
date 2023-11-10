@@ -9,40 +9,31 @@
 /*! Barrier constructor*/
 Barrier::Barrier(){
 
-  this->count = 0;
+  taskCount = 0;
   threadNum = 0;
-  condition = false;
   mutexSem=std::make_shared<Semaphore>(1);
-  //std::shared_ptr<Semaphore> mutex(new Semaphore(1));
-  barrierSem=std::make_shared<Semaphore>(0);
-  //std::shared_ptr<Semaphore> barrier1(new Semaphore(0));
-  // std::shared_ptr<Semaphore> barrier2(new Semaphore(1));
+  barrierSem1 = std::make_shared<Semaphore>(0);
+  barrierSem2 = std::make_shared<Semaphore>(1);
 
 }
 /*! Barrier with parameter constructor*/
-Barrier::Barrier(int count){
+Barrier::Barrier(int taskCount){
 
-  this->count = count;
+  this->taskCount = taskCount;
   threadNum = 0;
-  condition = false;
-  std::shared_ptr<Semaphore> mutex(new Semaphore(1));
-  std::shared_ptr<Semaphore> barrier1(new Semaphore(0));
-  // std::shared_ptr<Semaphore> barrier2(new Semaphore(1));
+  mutexSem = std::make_shared<Semaphore>(1);
+  barrierSem1 = std::make_shared<Semaphore>(0);
+  barrierSem2 = std::make_shared<Semaphore>(1); // Add the second turnstile semaphore
 }
 /*! Barrier deconstructor*/
 Barrier::~Barrier(){
 
 }
 
-/*! sets count value*/
-void Barrier::setCount(int x){
-
-  this->count = x;
-}
 /*! returns count value*/
 int Barrier::getCount(){
 
-  return this->count;
+  return this->taskCount;
 }
 
 /*! waits for all the threads before starting second half of code*/ 
@@ -51,11 +42,23 @@ void Barrier::waitForAll(){
   mutexSem->Wait();
   threadNum++;
 
-  if(threadNum == count){
-    barrierSem->Signal();
+  if(threadNum == taskCount){
+    barrierSem2->Wait();
+    barrierSem1->Signal();
+  }
+  mutexSem->Signal();
+  barrierSem1->Wait();
+  barrierSem1->Signal();
+
+  mutexSem->Wait();
+  threadNum--;
+
+  if(threadNum == 0){
+    barrierSem1->Wait();
+    barrierSem2->Signal();
     threadNum = 0;
   }
   mutexSem->Signal();
-  barrierSem->Wait();
-  barrierSem->Signal();
+  barrierSem2->Wait();
+  barrierSem2->Signal();
 }

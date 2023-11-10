@@ -11,11 +11,11 @@ class Barrier
 {
 private:
 
-  int count;
+  int taskCount;
   int threadNum;
-  bool condition;
   std::shared_ptr<Semaphore> mutexSem;
-  std::shared_ptr<Semaphore> barrierSem;
+  std::shared_ptr<Semaphore> barrierSem1;
+  std::shared_ptr<Semaphore> barrierSem2;
 
 
 public:
@@ -23,7 +23,6 @@ public:
   Barrier();
   ~Barrier();
   Barrier(int count);
-  void setCount(int count);
   int getCount();
   void waitForAll();
 };
