@@ -2,7 +2,7 @@
  * 
  * Filename: main.c
  * Description: 
- * Author: Joseph
+ * Author: Ming Kit Choy
  * Maintainer: 
  * Created: Wed Oct 11 09:28:12 2023 (+0100)
  * Last-Updated: Wed Oct 11 10:01:39 2023 (+0100)
@@ -44,6 +44,7 @@
 const int COUNT = 5;
 const int THINKTIME=3;
 const int EATTIME=5;
+std::shared_ptr<Semaphore> footman;
 std::vector<Semaphore> forks(COUNT);
 
 
@@ -54,13 +55,17 @@ void think(int myID){
 }
 
 void get_forks(int philID){
+  footman->Wait();
   forks[philID].Wait();
   forks[(philID+1)%COUNT].Wait();
+  stf::cout << philID << " holding forks." << std::endl;
 }
 
 void put_forks(int philID){
   forks[philID].Signal();
-  forks[(philID+1)%COUNT].Signal();  
+  forks[(philID+1)%COUNT].Signal();
+  stf::cout << philID << " releases forks." << std::endl;
+  footman->Signal();
 }
 
 void eat(int myID){
@@ -83,6 +88,8 @@ void philosopher(int id/* other params here*/){
 int main(void){
   srand (time(NULL)); // initialize random seed: 
   std::vector<std::thread> vt(COUNT);
+
+
   int id=0;
   for(std::thread& t: vt){
     t=std::thread(philosopher,id++/*,params*/);
