@@ -58,13 +58,13 @@ void get_forks(int philID){
   footman->Wait();
   forks[philID].Wait();
   forks[(philID+1)%COUNT].Wait();
-  stf::cout << philID << " holding forks." << std::endl;
+  std::cout << philID << " holding forks." << std::endl;
 }
 
 void put_forks(int philID){
   forks[philID].Signal();
   forks[(philID+1)%COUNT].Signal();
-  stf::cout << philID << " releases forks." << std::endl;
+  std::cout << philID << " releases forks." << std::endl;
   footman->Signal();
 }
 
@@ -89,7 +89,10 @@ int main(void){
   srand (time(NULL)); // initialize random seed: 
   std::vector<std::thread> vt(COUNT);
 
-
+  for(int i = 0; i < COUNT; i++){
+    forks[i].Signal();
+  }
+  footman = std::make_shared<Semaphore>(COUNT - 1);
   int id=0;
   for(std::thread& t: vt){
     t=std::thread(philosopher,id++/*,params*/);
