@@ -1,0 +1,30 @@
+\doxysection{rendezvous Class Reference}
+\hypertarget{classrendezvous}{}\label{classrendezvous}\index{rendezvous@{rendezvous}}
+
+
+The task function executed by each thread.  
+
+
+
+
+\doxysubsection{Detailed Description}
+The task function executed by each thread. 
+
+This function demonstrates a simple barrier synchronization using Semaphores. Each thread prints "{}first"{}, increments a shared counter, waits for all threads to arrive at the barrier, prints "{}second"{}, and repeats the process.
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Arrived} & A shared pointer to a counter tracking the number of threads that arrived. \\
+\hline
+{\em mutex\+Sem} & A shared pointer to a \doxylink{class_semaphore}{Semaphore} for mutual exclusion. \\
+\hline
+{\em barrier\+Sem} & A shared pointer to a \doxylink{class_semaphore}{Semaphore} for barrier synchronization. \\
+\hline
+{\em thread\+Count} & The total number of threads participating in the barrier. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+rendezvous.\+cpp\end{DoxyCompactItemize}

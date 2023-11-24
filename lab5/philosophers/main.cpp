@@ -3,11 +3,7 @@
  * Filename: main.c
  * Description: 
  * Author: Ming Kit Choy
- * Maintainer: 
- * Created: Wed Oct 11 09:28:12 2023 (+0100)
- * Last-Updated: Wed Oct 11 10:01:39 2023 (+0100)
- *           By: Joseph
- *     Update #: 13
+ * 
  * 
  */
 

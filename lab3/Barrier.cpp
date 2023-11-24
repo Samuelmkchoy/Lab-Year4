@@ -1,3 +1,9 @@
+/*! \file Barrier.h
+    \brief Implementation of a barrier using Semaphores.
+
+   Uses C++11 features such as mutex and condition variables to implement a barrier
+   using Semaphores with N number of threads.
+*/
 #include "Barrier.h"
 
 /*! \class Barrier
@@ -6,8 +12,13 @@
    Uses C++11 features such as mutex and condition variables to implement a barrier using Semaphores with N number threads
 
 */
-/*! Barrier constructor*/
-Barrier::Barrier(){
+
+
+/*!
+ * \brief Constructor for the Barrier class.
+ *
+ * Initializes the task count, thread number, and the required Semaphores.
+ */Barrier::Barrier(){
 
   taskCount = 0;
   threadNum = 0;
@@ -16,7 +27,14 @@ Barrier::Barrier(){
   barrierSem2 = std::make_shared<Semaphore>(1);
 
 }
-/*! Barrier with parameter constructor*/
+/*!
+ * \brief Constructor for the Barrier class with a parameter.
+ *
+ * Initializes the task count with the provided value and initializes
+ * the thread number and the required Semaphores.
+ *
+ * \param taskCount The total number of tasks to be performed.
+ */
 Barrier::Barrier(int taskCount){
 
   this->taskCount = taskCount;
@@ -30,13 +48,22 @@ Barrier::~Barrier(){
 
 }
 
-/*! returns count value*/
+/*!
+ * \brief Gets the current count value.
+ *
+ * \return The current count value.
+ */
 int Barrier::getCount(){
 
   return this->taskCount;
 }
 
-/*! waits for all the threads before starting second half of code*/ 
+/*!
+ * \brief Waits for all threads to reach the barrier before proceeding.
+ *
+ * This function uses Semaphores and mutex to synchronize threads at the barrier.
+ * After all threads arrive, it releases them to proceed with the second half of the code.
+ */
 void Barrier::waitForAll(){
 
   mutexSem->Wait();

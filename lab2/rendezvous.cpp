@@ -1,7 +1,36 @@
+/*! \class rendezvous
+
+ * \brief The task function executed by each thread.
+ *
+ * This function demonstrates a simple barrier synchronization using Semaphores.
+ * Each thread prints "first", increments a shared counter, waits for all threads
+ * to arrive at the barrier, prints "second", and repeats the process.
+ *
+ * \param numberArrived A shared pointer to a counter tracking the number of threads that arrived.
+ * \param mutexSem A shared pointer to a Semaphore for mutual exclusion.
+ * \param barrierSem A shared pointer to a Semaphore for barrier synchronization.
+ * \param threadCount The total number of threads participating in the barrier.
+ */
+
+#ifndef RENDEZVOUS.CPP
+#define RENDEZVOUS.CPP 
 #include "Semaphore.h"
 #include <thread>
 #include <vector>
 #include <iostream>
+
+/*!
+ * \brief The task function executed by each thread.
+ *
+ * This function demonstrates a simple barrier synchronization using Semaphores.
+ * Each thread prints "first", increments a shared counter, waits for all threads
+ * to arrive at the barrier, prints "second", and repeats the process.
+ *
+ * \param numberArrived A shared pointer to a counter tracking the number of threads that arrived.
+ * \param mutexSem A shared pointer to a Semaphore for mutual exclusion.
+ * \param barrierSem A shared pointer to a Semaphore for barrier synchronization.
+ * \param threadCount The total number of threads participating in the barrier.
+ */
 
 void task(std::shared_ptr<int> numberArrived, std::shared_ptr<Semaphore> mutexSem,std::shared_ptr<Semaphore> barrierSem, int threadCount){
     
@@ -26,6 +55,15 @@ void task(std::shared_ptr<int> numberArrived, std::shared_ptr<Semaphore> mutexSe
     std::cout << "second" << std::endl;
 }
 
+/*!
+ * \brief The main function where the program starts execution.
+ *
+ * This function initializes shared resources, creates a vector of threads,
+ * launches the threads to execute the task function, and waits for all threads to finish.
+ *
+ * \return Returns 0 upon successful execution.
+ */
+ 
 int main(void){
   std::shared_ptr<int> numberArrived;
   std::shared_ptr<Semaphore> mutexSem;
@@ -48,3 +86,5 @@ int main(void){
   
   return 0;
 }
+
+#endif

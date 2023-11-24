@@ -1,0 +1,29 @@
+The README file is a text file that explains what a project is.
+It should contain information on 
+
+1. Project Licence
+GNU GENERAL PUBLIC LICENSE
+
+2. Authors of Project
+Author: Ming Kit Choy C00246492
+
+3. How to install project
+
+4. List of any required Libraries, platform issues, etc.
+
+5. TO DO section listing items that need to be completed (errors, missing features etc.)
+
+6. List of files and what they contain
+- Semaphore.h - The header file for the Semaphore class. 
+- Semaphore.cpp - The implementation file for the Semaphore class. 
+- Barrier.cpp - The barrier is designed to synchronize multiple threads, ensuring they reach a designated point in the code before proceeding.
+- Barrier.h - The header file for the Barrier class.
+
+- Makefile - This is the project file. It contains rules that tell the system how to
+compile the code and produce a working executable called mutualExclusion.
+
+- Doxyfile - This file contains the settings for the Doxygen tool. It is generated
+by the Doxygen program when run for the first time.
+
+7. Any other relevent information
+
